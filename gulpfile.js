@@ -52,6 +52,16 @@ function styles() {
         .pipe(browserSync.stream()) // Сделаем инъекцию в браузер
 }
 
+function scripts() {
+    return src([ // Берём файлы из источников
+        'app/js/app.js', // Пользовательские скрипты, использующие библиотеку, должны быть подключены в конце
+    ])
+        .pipe(concat('app.min.js')) // Конкатенируем в один файл
+        .pipe(uglify()) // Сжимаем JavaScript
+        .pipe(dest('app/js/')) // Выгружаем готовый файл в папку назначения
+        .pipe(browserSync.stream()) // Триггерим Browsersync для обновления страницы
+}
+
 function images() {
     return src('app/img/**/*') // Берём все изображения из папки источника
         .pipe(imagemin()) // Сжимаем и оптимизируем изображеня
@@ -75,6 +85,7 @@ function cleandist() {
 function startwatch() {
 
     // Выбираем все файлы JS в проекте, а затем исключим с суффиксом .min.js
+    watch(['app/**/*.js', '!app/**/*.min.js'], scripts);
 
     // Мониторим файлы препроцессора на изменения
     watch('app/**/' + preprocessor + '/**/*', styles);
@@ -87,6 +98,8 @@ function startwatch() {
 // Экспортируем функцию browsersync() как таск browsersync. Значение после знака = это имеющаяся функция.
 exports.browsersync = browsersync;
 
+// Экспортируем функцию scripts() в таск scripts
+exports.scripts = scripts;
 
 // Экспортируем функцию styles() в таск styles
 exports.styles = styles;
@@ -96,7 +109,7 @@ exports.images = images;
 
 
 // Создаём новый таск "build", который последовательно выполняет нужные операции
-exports.build = series(cleandist, styles, images, buildcopy);
+exports.build = series(cleandist, styles, images, buildcopy,scripts);
 
 
-exports.default = parallel(styles, browsersync, startwatch, images);
+exports.default = parallel(styles, browsersync, startwatch, images, scripts);
