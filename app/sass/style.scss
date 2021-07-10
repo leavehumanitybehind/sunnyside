@@ -49,7 +49,7 @@ header {
 
 .main-wrapper {
     @include background-center;
-    background-image: url("../img/main-mobile-bg.png");
+    background-image: url("../img/dest/main-mobile-bg.png");
     background-color: #4abcf2;
     background-size: 100% 100%;
     height: 100%;
@@ -87,7 +87,7 @@ header {
 
 .intro__link {
     display: block;
-    background: url("../img/arrow-down.svg") no-repeat;
+    background: url("../img/dest/arrow-down.svg") no-repeat;
     background-size: 100% 100%;
     width: 30px;
     height: 108px;
