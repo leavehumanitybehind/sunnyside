@@ -1,10 +1,7 @@
-.advantages {
-    @media (min-width: $tablet-width) {
-    }
-}
 .advantages__list-item-bg {
     background-size: 100% 100%;
 }
+
 .advantages__list {
     @include no-list;
     display: block;
@@ -24,12 +21,6 @@
     &-item {
         display: flex;
         justify-content: space-between;
-
-        @media (min-width: $tablet-width) {
-        }
-
-        @media (min-width: $desktop-width) {
-        }
 
         &--brand {
             display: flex;
@@ -116,7 +107,7 @@
 
             @media (min-width: $desktop-width) {
                 background-position: top center;
-        }
+            }
         }
 
         &--photography {
@@ -135,10 +126,8 @@
             }
             @media (min-width: $desktop-width) {
                 background-position: top center;
+            }
         }
-        }
-
-        
     }
 }
 
