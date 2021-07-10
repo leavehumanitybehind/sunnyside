@@ -73,6 +73,7 @@ function buildcopy() {
     return src([ // Выбираем нужные файлы
         'app/css/**/*.min.css',
         'app/img/dest/**/*',
+        'app/js/**/*.min.js',
         'app/**/*.html',
     ], { base: 'app' }) // Параметр "base" сохраняет структуру проекта при копировании
         .pipe(dest('dist')) // Выгружаем в папку с финальной сборкой
